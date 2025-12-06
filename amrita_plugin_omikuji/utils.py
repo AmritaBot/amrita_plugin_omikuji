@@ -7,6 +7,7 @@ from amrita.plugins.chat.API import (
     config_manager,
     tools_caller,
 )
+from amrita.plugins.chat.utils.models import Message
 from nonebot import logger
 
 from .cache import OmikujiCacheData
@@ -66,14 +67,16 @@ async def generate_omikuji(
         if cache := await _hit_cache_omikuji(theme, level):
             return cache
     logger.debug(f"theme: {theme}, level: {level} Cache miss")
-    system_prompt = deepcopy(
-        config_manager.group_train if is_group else config_manager.private_train
+    system_prompt = Message.model_validate(
+        deepcopy(
+            config_manager.group_train if is_group else config_manager.private_train
+        )
     )
     system_prompt["content"] += "\n你现在需要结合你的角色设定生成御神签。"
-    user_prompt = {
-        "role": "user",
-        "content": f"御神签的运势是：'{level}'\n现在生成一张主题为：'{theme}'的御神签",
-    }
+    user_prompt = Message(
+        role="user",
+        content=f"御神签的运势是：'{level}'\n现在生成一张主题为：'{theme}'的御神签",
+    )
     msg_input = [system_prompt, user_prompt]
     data = await tools_caller(
         messages=msg_input, tools=[OMIKUJI_SCHEMA_META], tool_choice="required"
