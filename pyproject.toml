@@ -1,27 +1,28 @@
 [project]
-name = "nonebot-plugin-omikuji"
-version = "0.1.0.post1"
-description = "Nonebot2的御神签插件"
+name = "amrita-plugin-omikuji"
+version = "0.1.0"
+description = "AmritaBot的御神签插件"
 readme = "README.md"
 requires-python = ">=3.10, <4.0"
 dependencies = [
     "nonebot2[fastapi]>=2.4.3",
-    "nonebot-plugin-suggarchat>=3.4.4.3",
     "nonebot-adapter-onebot>=2.4.6",
     "nonebot-plugin-localstore>=0.7.4",
     "aiofiles>=24.1.0",
     "nonebot-plugin-orm>=0.8.2",
+    "amrita[full]>=0.4.4",
+    "zipp>=3.23.0",
 ]
 license = "GPL-3.0-or-later"
-keywords = ['chat", "suggar", "nonebot']
+keywords = ['chat",  "nonebot']
 
 [project.urls]
-"Homepage" = "https://github.com/LiteSuggarDEV/nonebot_plugin_omikuji"
-"Source" = "https://github.com/LiteSuggarDEV/nonebot_plugin_omikuji"
-"Issue Tracker" = "https://github.com/LiteSuggarDEV/nonebot_plugin_omikuji/issues"
+"Homepage" = "https://github.com/AmritaBot/amrita_plugin_omikuji"
+"Source" = "https://github.com/AmritaBot/amrita_plugin_omikuji"
+"Issue Tracker" = "https://github.com/AmritaBot/amrita_plugin_omikuji/issues"
 
 [tool.setuptools.packages.find]
-include = ["nonebot_plugin_omikuji*"]
+include = ["amrita_plugin_omikuji*"]
 namespaces = false
 
 [tool.uv]
@@ -67,9 +68,9 @@ typeCheckingMode = "standard"
 
 [tool.nonebot]
 plugins = [
-    "nonebot_plugin_suggarchat",
+    "amrita.plugins.chat",
     "nonebot_plugin_localstore",
-    "nonebot_plugin_omikuji",
+    "amrita_plugin_omikuji",
 ]
 adapters = [
     { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" },

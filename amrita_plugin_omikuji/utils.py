@@ -3,11 +3,11 @@ import random
 from copy import deepcopy
 from datetime import datetime, timedelta
 
-from nonebot import logger
-from nonebot_plugin_suggarchat.API import (
+from amrita.plugins.chat.API import (
     config_manager,
     tools_caller,
 )
+from nonebot import logger
 
 from .cache import OmikujiCacheData
 from .config import get_config

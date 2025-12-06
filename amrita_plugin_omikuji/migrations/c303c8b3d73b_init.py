@@ -38,7 +38,7 @@ def upgrade(name: str = "") -> None:
         sa.Column("updated_date", sa.String(length=30), nullable=False),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_omikuji_cache")),
         sa.UniqueConstraint("level", "theme", name="uq_omikuji_cache_level_theme"),
-        info={"bind_key": "nonebot_plugin_omikuji"},
+        info={"bind_key": "amrita_plugin_omikuji"},
     )
     with op.batch_alter_table("omikuji_cache", schema=None) as batch_op:
         batch_op.create_index(

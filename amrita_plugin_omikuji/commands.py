@@ -1,6 +1,7 @@
 import random
 import typing
 
+from amrita.plugins.menu import MatcherData
 from nonebot import on_command
 from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, Message, MessageEvent
 from nonebot.params import CommandArg
@@ -16,6 +17,9 @@ omikuji = on_command(
     priority=10,
     block=True,
     rule=lambda: get_config().enable_omikuji,
+    state=MatcherData(
+        name="omikuji", description="抽御神签", usage="/omikuji [主题]"
+    ).model_dump(),
 )
 
 
