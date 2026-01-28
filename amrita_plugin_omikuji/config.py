@@ -42,9 +42,13 @@ class Config(BaseModel):
         return self
 
 
+PLUGIN_CONFIG = get_plugin_config(Config)
+CACHE_DIR = get_plugin_cache_dir()
+
+
 def get_config() -> Config:
-    return get_plugin_config(Config)
+    return PLUGIN_CONFIG
 
 
 def get_cache_dir() -> Path:
-    return get_plugin_cache_dir()
+    return CACHE_DIR

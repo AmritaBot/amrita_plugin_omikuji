@@ -59,7 +59,7 @@ async def _hit_cache_omikuji(
 async def generate_omikuji(
     theme: THEME_TYPE,
     is_group: bool = False,
-    level: str = "",
+    level: str | None = None,
 ) -> OmikujiData:
     config = get_config()
     level = level or random_level()

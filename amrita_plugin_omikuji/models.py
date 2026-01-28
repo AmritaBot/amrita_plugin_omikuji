@@ -124,20 +124,20 @@ OMIKUJI_SCHEMA_META = ToolFunctionSchema(
     ),
 )
 
-FUNC_META = ToolFunctionSchema(
-    strict=True,
-    function=FunctionDefinitionSchema(
-        name="omikuji",
-        description="抽取一个御神签",
-        parameters=FunctionParametersSchema(
-            type="object",
-            properties={
-                "theme": FunctionPropertySchema(
-                    type="string",
-                    description="御神签主题（如果包含不良内容则随机选择）",
-                )
-            },
-            required=["theme"],
-        ),
+FUNC_DEFINTION = FunctionDefinitionSchema(
+    name="omikuji",
+    description="抽取一个御神签",
+    parameters=FunctionParametersSchema(
+        type="object",
+        properties={
+            "theme": FunctionPropertySchema(
+                type="string",
+                description="御神签主题（如果包含不良内容则随机选择）",
+                enum=OMIKUJI_THEMES,
+            )
+        },
+        required=["theme"],
     ),
 )
+
+FUNC_META = ToolFunctionSchema(strict=True, function=FUNC_DEFINTION)

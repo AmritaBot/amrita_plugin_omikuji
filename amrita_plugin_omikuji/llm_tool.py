@@ -2,15 +2,14 @@ import typing
 
 from amrita.plugins.chat.API import (
     ToolContext,
-    ToolData,
+    on_tools,
 )
 from nonebot import get_bot, logger
 from nonebot.adapters.onebot.v11 import MessageEvent
 
-from amrita_plugin_omikuji.cache import cache_omikuji, get_cached_omikuji
-
+from .cache import cache_omikuji, get_cached_omikuji
 from .config import get_config
-from .models import FUNC_META, OmikujiData
+from .models import FUNC_DEFINTION, OmikujiData
 from .utils import generate_omikuji
 
 LEVEL = ["大吉", "吉", "中吉", "小吉", "末吉", "凶", "大凶"]
@@ -34,7 +33,8 @@ def format_omikuji(data: OmikujiData, user_name: str | None = ""):
     return msg
 
 
-async def omikuji(ctx: ToolContext):
+@on_tools(FUNC_DEFINTION, custom_run=True, strict=True)
+async def omikuji(ctx: ToolContext) -> str:
     logger.info("获取御神签")
     nb_event: MessageEvent = typing.cast(MessageEvent, ctx.event.get_nonebot_event())
     is_group = hasattr(nb_event, "group_id")
@@ -51,7 +51,4 @@ async def omikuji(ctx: ToolContext):
         return data.model_dump_json()
     msg = format_omikuji(data)
     await bot.send(nb_event, msg)
-    ctx.matcher.cancel_nonebot_process()
-
-
-TOOL_DATA = ToolData(data=FUNC_META, func=omikuji, custom_run=True)
+    return "Generated a omikuji for user."
