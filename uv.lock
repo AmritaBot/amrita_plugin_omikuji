@@ -286,7 +286,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "aiofiles", specifier = ">=24.1.0" },
-    { name = "amrita", extras = ["full"], specifier = "==0.7.3" },
+    { name = "amrita", extras = ["full"], specifier = ">=0.7.3" },
     { name = "nonebot-adapter-onebot", specifier = ">=2.4.6" },
     { name = "nonebot-plugin-localstore", specifier = ">=0.7.4" },
     { name = "nonebot-plugin-orm", specifier = ">=0.8.2" },
