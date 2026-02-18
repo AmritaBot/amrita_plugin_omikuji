@@ -3,11 +3,11 @@ import random
 from copy import deepcopy
 from datetime import datetime, timedelta
 
-from amrita.plugins.chat.API import (
+from amrita.plugins.chat.config import (
     config_manager,
-    tools_caller,
 )
-from amrita.plugins.chat.utils.models import Message
+from amrita_core.libchat import tools_caller
+from amrita_core.types import Message
 from nonebot import logger
 
 from .cache import OmikujiCacheData

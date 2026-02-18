@@ -1,6 +1,7 @@
 import typing
 
-from amrita.plugins.chat.API import (
+from amrita.plugins.chat.runtime import AmritaChatObject
+from amrita_core import (
     ToolContext,
     on_tools,
 )
@@ -36,13 +37,14 @@ def format_omikuji(data: OmikujiData, user_name: str | None = ""):
 @on_tools(FUNC_DEFINTION, custom_run=True, strict=True)
 async def omikuji(ctx: ToolContext) -> str:
     logger.info("获取御神签")
-    nb_event: MessageEvent = typing.cast(MessageEvent, ctx.event.get_nonebot_event())
+    obj: AmritaChatObject = typing.cast(AmritaChatObject, ctx.event.chat_object)
+    nb_event: MessageEvent = obj.event
     is_group = hasattr(nb_event, "group_id")
-    bot = get_bot(str(ctx.event._nbevent.self_id))
+    bot = get_bot(str(nb_event.self_id))
 
     if (data := await get_cached_omikuji(nb_event)) is None:
         await bot.send(
-            ctx.event._nbevent,
+            nb_event,
             "轻轻摇动古老的签筒，竹签哗啦作响... 心中默念所求之事... 一支签缓缓落下。",
         )
         data = await generate_omikuji(ctx.data["theme"], is_group)

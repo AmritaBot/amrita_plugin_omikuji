@@ -3,7 +3,7 @@ from __future__ import annotations
 import random
 from typing import Literal
 
-from amrita.plugins.chat.API import (
+from amrita_core import (
     FunctionDefinitionSchema,
     FunctionParametersSchema,
     FunctionPropertySchema,
